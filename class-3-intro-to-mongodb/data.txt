@@ -1,0 +1,4 @@
+username - mrind3v
+pass - max 
+connection string - 
+mongodb+srv://mrind3v:max@cluster0.5r2z44c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
