@@ -40,7 +40,7 @@ let productSchema = new mongoose.Schema({
   },
 });
 
-// 2. next we will create collections in the database. We create Model to create collections
+// 2. next we will create collection in the database. We create Model to create collections
 // it means - "I want to create a 'products' collection that will follow 'productSchema'"
 let ProductModel = mongoose.model("products", productSchema);
 
