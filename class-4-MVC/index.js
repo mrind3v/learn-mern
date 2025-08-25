@@ -5,7 +5,7 @@ const { connectMongoDb } = require("./connection.js");
 // routes (here productRoutes) is an external file. whenever we want to use external files, we make
 // use of app.use() function.
 const productRoutes = require("./routes/product.route.js"); // routes is in the same folder as index.js
-const { populate } = require("dotenv");
+const userRoutes = require("./routes/user.route.js")
 
 const PORT = 8080;
 
@@ -14,11 +14,12 @@ const app = express();
 app.use(express.json());
 
 // default route with respect to which all other routes will be defined
-app.use("/api", productRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
-app.get("/", (req,res)=>{
-  res.send("Welcome Aboard!")
-})
+app.get("/", (req, res) => {
+  res.send("Welcome Aboard!");
+});
 
 // username and pass is in the connection URL itself which is a security risk. To refrain from
 // exposing the data. we will use the .env file which won't be pushed to github. To handle env
