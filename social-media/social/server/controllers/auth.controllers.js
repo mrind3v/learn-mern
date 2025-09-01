@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 
-const signUp = async (req, res) => {
+export const signUp = async (req, res) => {
   try {
     const { name, username, email, password } = req.body;
     // Validate user data
@@ -9,13 +9,13 @@ const signUp = async (req, res) => {
     }
 
     // Validate email
-    const existingUserEmail = await User.findOne(email);
+    const existingUserEmail = await User.findOne({email});
     if (existingUserEmail) {
       return res.status(400).json({ message: "Email already in use" });
     }
 
     // Validate username
-    const existingUserName = await User.findOne(username);
+    const existingUserName = await User.findOne({username});
     if (existingUserName) {
       return res.status(400).json({ message: "Username already in use" });
     }

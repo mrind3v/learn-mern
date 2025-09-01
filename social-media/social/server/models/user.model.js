@@ -1,8 +1,4 @@
 import mongoose from "mongoose";
-import {
-  emit,
-  estimatedDocumentCount,
-} from "../../../../class-4-MVC/models/product.model";
 
 // first create user schema (keeping social media in mind) and then the model
 const userSchema = new mongoose.Schema(
