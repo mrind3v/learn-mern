@@ -1,8 +1,9 @@
-// create server -> database -> build features
-
+// create server -> connect database -> build features
+// authorization - what part of the app can a user access
+// authentication - is the user who they say they are
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config(); // without dotenv, variables insides .env can't be processes/used import mongoose from "mongoose";    
+dotenv.config(); // without dotenv, variables insides .env can't be processes/used import mongoose from "mongoose";
 import connectDB from "./config/db.js";
 const PORT = 8080;
 const app = express();
