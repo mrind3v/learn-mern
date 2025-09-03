@@ -1,3 +1,4 @@
+import genToken from "../config/token.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
@@ -41,9 +42,14 @@ export const signUp = async (req, res) => {
       password: hashedPassword,
     });
     await newUser.save(); // save user to database
+
+    // generate token for the user after creating the user. Stamp the token with secret key
+    // and user id. This token will be used to verify the user in future requests
+    const token = genToken(newUser._id);
+
     res
       .status(201)
-      .json({ message: "User created successfully", user: newUser });
+      .json({ message: "User created successfully", user: newUser, token });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
