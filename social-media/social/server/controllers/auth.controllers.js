@@ -82,6 +82,19 @@ export const signIn = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
+    // generate token  
+    const token = await genToken(existingUser._id);
+
+    // after generating the token, we will store it in the browser cookie.
+    // Whenever you get access to the app, a token is given to you and that token is verified
+    // on the server set cookie options
+    res.cookie("token", token, {
+      httpOnly: true,
+      //secure: process.env.NODE_ENV === "production", // only send cookie over https in production
+      sameSite: true, // to prevent CSRF attacks. 
+      maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+    });
+
     // if credentials are valid, send success response
     res.status(200).json({ message: "Sign in successful", user: existingUser });
   } catch (err) {
