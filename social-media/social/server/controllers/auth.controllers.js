@@ -31,16 +31,54 @@ export const signUp = async (req, res) => {
     // before storing the password, we will hash it using bcrypt
     // generate salt first - a random string that will be added to the password before hashing
     const salt = await bcrypt.genSalt(10); // 10 rounds of salt generation - how rounds to randomise our pass
-    const hashedPassword = await bcrypt.hash(password, salt); // hash the password with the salt 
-
+    const hashedPassword = await bcrypt.hash(password, salt); // hash the password with the salt
 
     // if all data is valid, create user - using try and catch block
-    const newUser = new User({ name, username, email, password : hashedPassword });
+    const newUser = new User({
+      name,
+      username,
+      email,
+      password: hashedPassword,
+    });
     await newUser.save(); // save user to database
     res
       .status(201)
       .json({ message: "User created successfully", user: newUser });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+export const signIn = async (req, res) => {
+  try {
+    // take username and password from req.body
+    const { username, password } = req.body;
+
+    // validate user data - if any field is missing
+    if (!username || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // check if user exists in database
+    const existingUser = await User.findOne({ username });
+    if (!existingUser) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // will use bcrypt to compare the password by hashing the entered password with salt.
+    // bcrypt.compare() extracts the salt from original password in the database -> add it to entered
+    //  password -> hash it using the same hashing function and compare!
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // if credentials are valid, send success response
+    res.status(200).json({ message: "Sign in successful", user: existingUser });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error!" });
   }
 };
