@@ -13,8 +13,8 @@ const isAuth = async (req, res, next) => {
 
         // verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded.id; // add user id to request object
-        next(); // proceed to the next middleware or route handler
+        req.userId = decoded.id; // add user id to request object
+        next(); // proceed to the next middleware or controller
     } catch (error) {
         return res.status(401).json({ message: "Token is not valid" });
     }
