@@ -46,6 +46,12 @@ export const signUp = async (req, res) => {
     // generate token for the user after creating the user. Stamp the token with secret key
     // and user id. This token will be used to verify the user in future requests
     const token = genToken(newUser._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      //secure: process.env.NODE_ENV === "production", // only send cookie over https in production
+      sameSite: true, // to prevent CSRF attacks.
+      maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+    });
 
     res
       .status(201)
@@ -82,7 +88,7 @@ export const signIn = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // generate token  
+    // generate token
     const token = await genToken(existingUser._id);
 
     // after generating the token, we will store it in the browser cookie.
@@ -91,7 +97,7 @@ export const signIn = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       //secure: process.env.NODE_ENV === "production", // only send cookie over https in production
-      sameSite: true, // to prevent CSRF attacks. 
+      sameSite: true, // to prevent CSRF attacks.
       maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
     });
 
