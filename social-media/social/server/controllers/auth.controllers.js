@@ -45,7 +45,7 @@ export const signUp = async (req, res) => {
 
     // generate token for the user after creating the user. Stamp the token with secret key
     // and user id. This token will be used to verify the user in future requests
-    const token = genToken(newUser._id);
+    const token = await genToken(newUser._id);
     res.cookie("token", token, {
       httpOnly: true,
       //secure: process.env.NODE_ENV === "production", // only send cookie over https in production

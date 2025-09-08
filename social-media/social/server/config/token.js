@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const genToken = async () => {
+const genToken = async (id) => {
   try {
     // generate a token when user signs in or signs up
     const token = jwt.sign({ id }, process.env.JWT_SECRET, {
