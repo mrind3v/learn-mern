@@ -21,7 +21,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter); // http://localhost:8080/api/auth/signup
 app.use("/api/user", userRouter)
 app.use(cors({
-  origin: "http://localhost:5173", // allow this origin to access the server
+  origin: "http://localhost:5173", // allow this origin(client) to access the server
   credentials: true, // allow cookies to be sent with requests
 }))
 app.use(cookieParser());
