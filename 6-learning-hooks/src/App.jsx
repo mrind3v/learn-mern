@@ -6,17 +6,18 @@ import UseState from "./components/UseState.jsx";
 import UseEffect from "./components/UseEffect.jsx";
 import UseRef from "./components/UseRef.jsx";
 import UseMemo from "./components/UseMemo.jsx";
+import UseContext from "./components/UseContext.jsx";
 
 function App() {
   return (
     <>
-    
-    <UseMemo/>
-    {/* <UseRef/> */}
-    {/* <UseEffect/> */}
-    {/* <UseState/> */}
+      {/* <UseContext/> */}
+      {/* <UseMemo/> */}
+      {/* <UseRef/> */}
+      {/* <UseEffect/> */}
+      {/* <UseState/> */}
     </>
-  )
+  );
 }
 
 export default App;
