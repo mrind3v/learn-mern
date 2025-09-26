@@ -11,7 +11,8 @@ const UseCallback = () => {
 //   }
 // cahching this newFn using useCallback so that it doesn't create a new instance everytime if fn body remains
 // the same
-const newFn = useCallback(()=>{},[]) // header prop will be same if we use this cached fn
+const newFn = useCallback(()=>{},[count]) // whenever count changes, a new instance of newFn will be created
+// so header will indeed re-render. so keep it empty if you do not want to use the same cached newFn 
   return (
     <>
     {/* Header will render everytime click here is clicked, even tho we are not changing anything in Header comp*/}
