@@ -5,11 +5,14 @@ import "./App.css";
 import UseState from "./components/UseState.jsx";
 import UseEffect from "./components/UseEffect.jsx";
 import UseRef from "./components/UseRef.jsx";
+import UseMemo from "./components/UseMemo.jsx";
 
 function App() {
   return (
     <>
-    <UseRef/>
+    
+    <UseMemo/>
+    {/* <UseRef/> */}
     {/* <UseEffect/> */}
     {/* <UseState/> */}
     </>
