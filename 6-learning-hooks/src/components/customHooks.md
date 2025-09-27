@@ -1,0 +1,1 @@
+We build custom hooks if we want to use some compnt logic in many different compnts, we can extract that logic to create a custom hook
