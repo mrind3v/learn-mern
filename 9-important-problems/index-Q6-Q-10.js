@@ -12,7 +12,7 @@ const Note = mongoose.model("Note", noteSchema);
 app.post("/notes", async (req,res,next)=>{
   try {
     const { title, content } = req.body; 
-    if (!title && !content){
+    if (!title || !content){
       return res.status(400).json({message: "Bad request"}) 
     }
     const newNote = new Note({title, content});
@@ -181,6 +181,7 @@ app.use(requestLoggerMiddleware);
 
 
 // Q9. Hash user password using bcrypt and then push into users array
+const bcrypt = require("bcrypt")
 const users = []; 
 
 app.post("/register", async (req, res) => {

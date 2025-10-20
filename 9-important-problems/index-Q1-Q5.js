@@ -20,7 +20,7 @@ app.get("/articles/search", async (req, res) => {
   const releventArticles = await Article.find(
     // do a text search on those fields that have text index (here title and content)
     { $text: { $search: query } },
-    // projection object - new field called score and scoring is calculated using meta operator
+    // projection object - new field called score and it is calculated using meta operator
     // include title, content and score only - projection obj defines what fields to return in the doc
     { title: 1, content: 1, score: { $meta: "textScore" } }
   ).sort({ score: { $meta: "textScore" } }); // sort with the projection object

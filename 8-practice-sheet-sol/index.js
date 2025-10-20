@@ -53,11 +53,8 @@ app.use("/products", productRouter);
 //----------------------------------------------------------------------------------------------------------------------
 
 
-// Q8 Chained routes - Users CRUD
-const Users = [
-  { id: 1, name: "mrin" },
-  { id: 2, name: "tanishq" },
-];
+// Q8 Chained routes - Users CRUD - see data folder for the required data -> then controllers folder and after that
+// the routes folder
 app.use("/", userRouter);
 
 
@@ -81,16 +78,6 @@ app.get("/posts", (req, res) => {
   }, 2000);
 });
 
-
-//---------------------------------------------------------------------------------------------------------------------
-
-
-// Q13. post /todos that takes title from req body and sends back incremented id and the title
-id = 1;
-app.post("/todos", (req, res) => {
-  const { title } = req.body;
-  res.json({ id: id++, title });
-});
 
 
 //-----------------------------------------------------------------------------------------------------------------
